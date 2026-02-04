@@ -6,6 +6,8 @@ public class Rook extends ChessPiece {
         this.y=y;
         this.pieceType="rook";
     }
-
+    public ChessPiece clone(){
+        return new Rook(x,y,owner);
+    }
 }
 

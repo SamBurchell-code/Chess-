@@ -7,5 +7,9 @@ public class Bishop extends ChessPiece {
         this.pieceType="bishop";
     }
 
+    public ChessPiece clone(){
+        return new Bishop(x,y,owner);
+    }
+
 }
 

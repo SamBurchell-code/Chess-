@@ -2,6 +2,20 @@ public class Board {
 
     private ChessPiece[][] squares;
 
+    public Board(Board board) { // to create a clone of a board, in order to simulate the next move and ensure it ends in valid board state
+
+        this.squares = new ChessPiece[9][9];
+
+        for (int i=1; i<9; i++) {
+            for (int k=1;k<9;k++) {
+                ChessPiece piece = board.squares[i][k];
+                if (piece != null) {
+                    squares[i][k].clone();
+                }
+            }
+        }
+
+    }
     public Board (Player player1, Player player2) {
         this.squares = new ChessPiece[9][9];
 
@@ -33,5 +47,10 @@ public class Board {
 
     public Player ownerAt(int x, int y) {
         return squares[x][y].owner;
+    }
+
+    public boolean isInCheck() {
+        
+        return false;
     }
 }

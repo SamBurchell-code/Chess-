@@ -6,4 +6,8 @@ public Pawn(int x, int y, Player owner) {
     this.y=y;
     this.pieceType="pawn";
 }
+
+    public ChessPiece clone(){
+        return new Pawn(x,y,owner);
+    }
 }

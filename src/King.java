@@ -6,6 +6,8 @@ public class King extends ChessPiece {
         this.y=y;
         this.pieceType="king";
     }
-
+    public ChessPiece clone(){
+        return new King(x,y,owner);
+    }
 }
 

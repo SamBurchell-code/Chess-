@@ -7,5 +7,9 @@ public class Queen extends ChessPiece {
         this.pieceType="queen";
     }
 
+    public ChessPiece clone(){
+        return new Queen(x,y,owner);
+    }
+
 }
 
