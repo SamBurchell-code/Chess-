@@ -1,10 +1,10 @@
 public class Rook extends ChessPiece {
 
-    public Rook(int x, int y) {
-        super(x, y);
+    public Rook(int x, int y, Player owner) {
+        super(x, y, owner);
         this.x=x;
         this.y=y;
-        this.pieceType='R';
+        this.pieceType="rook";
     }
 
 }

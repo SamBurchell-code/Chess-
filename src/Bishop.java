@@ -4,7 +4,7 @@ public class Bishop extends ChessPiece {
         super(x, y, owner);
         this.x=x;
         this.y=y;
-        this.pieceType='B';
+        this.pieceType="bishop";
     }
 
 }

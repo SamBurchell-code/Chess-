@@ -11,7 +11,7 @@ public class Game {
         this.player1 = player1;
         this.player2 = player2;
         this.currentPlayer=player1;
-        this.board = new Board();
+        this.board = new Board(player1, player2);
         boolean gameover=false;
         while (gameover==false) {
 
@@ -54,15 +54,51 @@ public class Game {
             sourceY=secondChar-'0';
 
             System.out.println("You are moving the piece on " + sourceX + ","+ sourceY);
+            String pieceAtSource = board.pieceAt(sourceX,sourceY);
+
+            if (!pieceAtSource.equals(pieceType)){
+                System.out.println("You have selected the wrong piece for this square. Please restart your move");
+                continue;
+            }
+            Player pieceOwner = board.ownerAt(sourceX,sourceY);
+
+            if(!pieceOwner.equals(currentPlayer)) {
+                System.out.println("That is not your piece. Please restart your move");
+                continue;
+            }
 
             System.out.println("What square do you want to move it to?");
             String target = scan.next ();
+
+            if (target.length() !=2) {
+                System.out.println("Invalid input. Please restart your move");
+            }
+            firstChar =target.charAt(0);
+            firstChar = Character.toLowerCase(firstChar);
+
+            if (firstChar < 'a' || firstChar > 'h') {
+                System.out.println("That is not a valid column.");
+                continue;
+            }
+
+            targetX = firstChar - 'a' + 1;
+
+            secondChar = target.charAt(1);
+
+            if(secondChar < '1' || secondChar > '8') {
+                System.out.println("That is not a valid row. Please restart your move");
+                continue;
+            }
+            targetY=secondChar-'0';
+
+            System.out.println("You are moving the piece to " + targetX + ","+ targetY);
+
 
 
         }
     }
 
-        public char pieceAt ( int x, int y){
+        public String pieceAt ( int x, int y){
 
             return board.pieceAt(x, y);
         }
