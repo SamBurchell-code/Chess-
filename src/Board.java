@@ -28,8 +28,8 @@ public class Board {
         squares[1][7] = new Knight(1,7,player1);
         squares[1][8] = new Rook(1,8,player1);
         for (int i=1;i<9;i++) {
-            squares[2][i] =new Pawn (2,i,player1);
-            squares[7][i] = new Pawn( 7, i,player2);
+            squares[2][i] =new Pawn (2,i,player1, "White");
+            squares[7][i] = new Pawn( 7, i,player2,"Black");
         }
         squares[8][1] = new Rook(8,1,player2);
         squares[8][2] = new Knight (8,2,player2);

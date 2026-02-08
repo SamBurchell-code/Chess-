@@ -1,13 +1,42 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Pawn extends ChessPiece{
 
-public Pawn(int x, int y, Player owner) {
-    super(x, y, owner);
+public Pawn(int x, int y, Player owner, String colour) {
+    super(x, y, owner, colour);
     this.x=x;
     this.y=y;
     this.pieceType="pawn";
+    this.colour=colour;
 }
 
     public ChessPiece clone(){
-        return new Pawn(x,y,owner);
+        return new Pawn(x,y,owner,colour);
+    }
+
+    public List<int[]> controlledSquares(Board board) {
+        List<int[]> controlled = new ArrayList<>();
+        int direction;
+        if(colour.equals("White")) {
+            direction=1;
+        }
+        else {
+            direction=-1;
+        }
+        int[][] moves = {
+                { 1,  direction}, { -1, direction},
+        };
+
+        for (int[] m : moves) {
+            int nx = x + m[0];
+            int ny = y + m[1];
+
+            if (board.inBounds(nx,ny)) {
+                controlled.add(new int[]{nx, ny});
+            }
+        }
+
+        return controlled;
     }
 }

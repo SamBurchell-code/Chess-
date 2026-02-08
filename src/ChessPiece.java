@@ -6,11 +6,22 @@ abstract class ChessPiece implements Cloneable {
     protected int x;
     protected int y;
     protected Player owner;
+    protected String colour;
+    public ChessPiece ( int x, int y, Player player, String colour) {
+
+        this.x=x;
+        this.y=y;
+        this.owner = player;
+        this.colour=colour;
+
+    }
+
     public ChessPiece ( int x, int y, Player player) {
 
         this.x=x;
         this.y=y;
         this.owner = player;
+        this.colour=colour;
 
     }
 

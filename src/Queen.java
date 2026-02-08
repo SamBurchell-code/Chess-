@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Queen extends ChessPiece {
 
     public Queen(int x, int y, Player owner) {
@@ -10,6 +13,33 @@ public class Queen extends ChessPiece {
     public ChessPiece clone(){
         return new Queen(x,y,owner);
     }
+    public List<int[]> controlledSquares(Board board) {
+        List<int[]> controlled = new ArrayList<>();
 
+        int[][] dirs = { //the directions a rook can move
+                { 1,  0},
+                { -1, 0},
+                {0,  1},
+                {0, -1}
+        };
+
+        for (int[] d : dirs) { //for each direction
+            int nx = x + d[0]; //adjust the x in that direction
+            int ny = y + d[1]; //adjust the y in that direction
+
+            while (board.inBounds(nx,ny)) { //while new x and new y are within bounds
+                controlled.add(new int[]{nx, ny}); //add the square
+
+                if (board.isOccupied(nx,ny)) {
+                    break; //if there is a piece on that square, we go no further in this direction
+                }
+
+                nx += d[0]; //continue moving in that direction, if not stopped by previous if-statement
+                ny += d[1];
+            }
+        }
+
+        return controlled;
+    }
 }
 
