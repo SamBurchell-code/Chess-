@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.ArrayList;
+
 public class Board {
 
     public ChessPiece[][] squares;
@@ -42,6 +45,9 @@ public class Board {
     }
 
     public String pieceAt(int x, int y) {
+        if(squares[x][y]==null) {
+            return null;
+        }
         return squares[x][y].pieceType;
     }
 
@@ -63,5 +69,50 @@ public class Board {
     public boolean isInCheck() {
 
         return false;
+    }
+
+    public boolean move(int sourceX, int sourceY, int targetX, int targetY) {
+
+        List<int[]> possibilities = squares[sourceX][sourceY].controlledSquares(this);
+        boolean possible = false;
+        for( int[] p : possibilities) {
+            if(p[0]==targetX &&p[1]==targetY){
+                possible=true;
+            }
+        }
+        if(possible){
+        squares[targetX][targetY] =squares[sourceX][sourceY];
+        squares[sourceX][sourceY]=null;
+
+        return true;}
+        System.out.println("invalid move,try again");
+        return false;
+
+    }
+
+    public void print() {
+       String output="";
+        for (int i=8;i>0;i--) {
+            for (int k=1;k<9;k++) {
+                ChessPiece piece = squares[i][k];
+
+                if(piece==null) {
+                    output+= "_";
+                    continue;
+                }
+                switch (piece) {
+                    case Rook r -> output += "R";
+                    case Pawn p -> output += "P";
+                    case Bishop b -> output += "B";
+                    case Knight n -> output += "N";
+                    case Queen q -> output += "Q";
+                    case King K -> output += "K";
+                    default -> output += "_"; // empty square
+                }
+
+            }
+            output+="\n";
+        }
+        System.out.println(output);
     }
 }

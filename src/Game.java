@@ -15,6 +15,7 @@ public class Game {
         boolean gameover=false;
         while (gameover==false) {
 
+            board.print();
             Scanner scan = new Scanner(System.in);
             System.out.println("What type of piece do you want to move? Please use lowercase.");
             String pieceType = scan.next();
@@ -93,6 +94,9 @@ public class Game {
 
             System.out.println("You are moving the piece to " + targetX + ","+ targetY);
 
+            boolean moved = board.move(sourceX,sourceY,targetX,targetY);
+
+            if (moved) {System.out.println("Your move was valid. next move");}
 
 
         }
