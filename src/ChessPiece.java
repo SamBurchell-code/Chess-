@@ -1,3 +1,5 @@
+import java.util.List;
+
 abstract class ChessPiece implements Cloneable {
 
     protected String pieceType;
@@ -17,4 +19,6 @@ abstract class ChessPiece implements Cloneable {
     }
 
     public abstract ChessPiece clone();
+
+    public abstract List<int[]> controlledSquares(Board board);
 }

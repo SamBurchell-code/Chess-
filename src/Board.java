@@ -1,6 +1,6 @@
 public class Board {
 
-    private ChessPiece[][] squares;
+    public ChessPiece[][] squares;
 
     public Board(Board board) { // to create a clone of a board, in order to simulate the next move and ensure it ends in valid board state
 
@@ -10,7 +10,7 @@ public class Board {
             for (int k=1;k<9;k++) {
                 ChessPiece piece = board.squares[i][k];
                 if (piece != null) {
-                    squares[i][k].clone();
+                    this.squares[i][k]=piece.clone();
                 }
             }
         }
@@ -49,8 +49,19 @@ public class Board {
         return squares[x][y].owner;
     }
 
+    public boolean inBounds(int x, int y) {
+        return (x >= 1 && x<= 8 && y >= 1 && y <= 8);
+    }
+    public boolean isOccupied(int x, int y){
+        if(!inBounds(x,y)) {
+            return false;
+        }
+
+        return ( squares[x][y]!=null);
+    }
+
     public boolean isInCheck() {
-        
+
         return false;
     }
 }
