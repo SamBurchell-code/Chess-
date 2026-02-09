@@ -8,7 +8,7 @@ void main() {
     Player Odi = new Player (2, "Oditwo");
 
     Game firstGame = new Game(Odi, Sam);
-    firstGame.pieceAt(1,2);
+    firstGame.pieceAt(5,2);
     System.out.println("The piece at position " + "1"+"," +"2"+" is " + firstGame.pieceAt(1,2));
 
 }

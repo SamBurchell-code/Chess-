@@ -24,6 +24,9 @@ abstract class ChessPiece implements Cloneable {
         this.colour=colour;
 
     }
+    public String getColour() {
+        return this.colour;
+    }
 
     public void moveTo(int x, int y) {
 

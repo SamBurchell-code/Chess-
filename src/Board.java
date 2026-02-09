@@ -23,24 +23,24 @@ public class Board {
         this.squares = new ChessPiece[9][9];
 
         squares[1][1] = new Rook(1,1, player1 );
-        squares[1][2] = new Knight (1,2, player1);
-        squares[1][3] = new Bishop(1,3, player1);
-        squares[1][4] = new Queen(1,4,player1);
-        squares[1][5] = new King (1,5,player1);
-        squares[1][6] = new Bishop(1,6,player1);
-        squares[1][7] = new Knight(1,7,player1);
-        squares[1][8] = new Rook(1,8,player1);
+        squares[2][1] = new Knight (2,1, player1);
+        squares[3][1] = new Bishop(3,1, player1);
+        squares[4][1] = new Queen(4,1,player1);
+        squares[5][1] = new King (5,1,player1);
+        squares[6][1] = new Bishop(6,1,player1);
+        squares[7][1] = new Knight(7,1,player1);
+        squares[8][1] = new Rook(8,1,player1);
         for (int i=1;i<9;i++) {
-            squares[2][i] =new Pawn (2,i,player1, "White");
-            squares[7][i] = new Pawn( 7, i,player2,"Black");
+            squares[i][2] =new Pawn (i,2,player1, "White");
+            squares[i][7] = new Pawn( i,7,player2,"Black");
         }
-        squares[8][1] = new Rook(8,1,player2);
-        squares[8][2] = new Knight (8,2,player2);
-        squares[8][3] = new Bishop(8,3,player2);
-        squares[8][4] = new Queen(8,4,player2);
-        squares[8][5] = new King (8,5,player2);
-        squares[8][6] = new Bishop(8,6,player2);
-        squares[8][7] = new Knight(8,7,player2);
+        squares[1][8] = new Rook(1,8,player2);
+        squares[2][8] = new Knight (2,8,player2);
+        squares[3][8] = new Bishop(3,8,player2);
+        squares[4][8] = new Queen(4,8,player2);
+        squares[5][8] = new King (5,8,player2);
+        squares[6][8] = new Bishop(6,8,player2);
+        squares[7][8] = new Knight(7,8,player2);
         squares[8][8] = new Rook(8,8,player2);
     }
 
@@ -73,6 +73,15 @@ public class Board {
 
     public boolean move(int sourceX, int sourceY, int targetX, int targetY) {
 
+        if (squares[sourceX][sourceY] instanceof Pawn) {
+            return movePawn(sourceX, sourceY, targetX, targetY);
+
+        }
+        if(squares[sourceX][sourceY].getColour().equals(squares[targetX][targetY].getColour())){
+            System.out.println("you already have a piece there");
+            return false;
+        }
+
         List<int[]> possibilities = squares[sourceX][sourceY].controlledSquares(this);
         boolean possible = false;
         for( int[] p : possibilities) {
@@ -90,11 +99,52 @@ public class Board {
 
     }
 
+    public boolean movePawn(int sourceX, int sourceY, int targetX, int targetY) {
+
+        Pawn pawn = (Pawn) squares[sourceX][sourceY];
+        int direction=0;
+        switch (pawn.getColour()){
+            case "White": direction=1; break;
+            case "Black": direction=-1; break;
+            default:{
+                    System.out.println("Problem with switch statement in movePawn");
+                    return false;
+            }
+        }
+        if (sourceX==targetX && targetY==sourceY+direction && squares[targetX][targetY]==null) { //moving pawn one square forward
+            squares[targetX][targetY]=squares[sourceX][sourceY];
+            squares[sourceX][sourceY]=null;
+
+            pawn.setUnmoved(false);
+            return true;
+        }
+        else if (sourceX==targetX && targetY==sourceY+(2*direction) && squares[targetX][targetY]==null&& pawn.getUnmoved() &&squares[targetX][sourceY+direction]==null) { //moving two steps forward
+
+            squares[targetX][targetY]=pawn;
+            squares[sourceX][sourceY]=null;
+            pawn.setUnmoved(false);
+            return true;
+        }
+        else if(squares[targetX][targetY]==null) {
+            System.out.println("nothing for the pawn to capture, or invalid square");
+        }
+        else if ((targetX==sourceX+1 || targetX==sourceX-1) && targetY==sourceY+direction && !squares[targetX][targetY].getColour().equals(pawn.getColour())){ //capture diagonally
+            squares[targetX][targetY]=pawn;
+            squares[sourceX][sourceY]=null;
+            pawn.setUnmoved(false);
+            return true;
+        }
+
+
+
+        return false;
+    }
+
     public void print() {
        String output="";
         for (int i=8;i>0;i--) {
             for (int k=1;k<9;k++) {
-                ChessPiece piece = squares[i][k];
+                ChessPiece piece = squares[k][i];
 
                 if(piece==null) {
                     output+= "_";

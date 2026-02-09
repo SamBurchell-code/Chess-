@@ -56,7 +56,10 @@ public class Game {
 
             System.out.println("You are moving the piece on " + sourceX + ","+ sourceY);
             String pieceAtSource = board.pieceAt(sourceX,sourceY);
-
+            if(pieceAtSource==null){
+                System.out.println("There is no piece here, please restart your move");
+                continue;
+            }
             if (!pieceAtSource.equals(pieceType)){
                 System.out.println("You have selected the wrong piece for this square. Please restart your move");
                 continue;
