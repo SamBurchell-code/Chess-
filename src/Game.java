@@ -99,12 +99,19 @@ public class Game {
 
             boolean moved = board.move(sourceX,sourceY,targetX,targetY);
 
-            if (moved) {System.out.println("Your move was valid. next move");}
+            if (moved) {System.out.println("Your move was valid. next move");
+            swapPlayer();}
 
 
         }
     }
-
+public void swapPlayer() {
+        if (currentPlayer.equals(player1)){
+            currentPlayer=player2;
+        }
+        else
+            currentPlayer=player1;
+}
         public String pieceAt ( int x, int y){
 
             return board.pieceAt(x, y);

@@ -77,10 +77,11 @@ public class Board {
             return movePawn(sourceX, sourceY, targetX, targetY);
 
         }
+        if(squares[targetX][targetY]!=null){
         if(squares[sourceX][sourceY].getColour().equals(squares[targetX][targetY].getColour())){
             System.out.println("you already have a piece there");
             return false;
-        }
+        }}
 
         List<int[]> possibilities = squares[sourceX][sourceY].controlledSquares(this);
         boolean possible = false;
