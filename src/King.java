@@ -3,14 +3,14 @@ import java.util.List;
 
 public class King extends ChessPiece {
 
-    public King(int x, int y, Player owner) {
-        super(x, y, owner);
+    public King(int x, int y, Player owner, String colour) {
+        super(x, y, owner, colour);
         this.x=x;
         this.y=y;
         this.pieceType="king";
     }
     public ChessPiece clone(){
-        return new King(x,y,owner);
+        return new King(x,y,owner, colour);
     }
 
     public List<int[]> controlledSquares(Board board) {

@@ -3,15 +3,15 @@ import java.util.List;
 
 public class Queen extends ChessPiece {
 
-    public Queen(int x, int y, Player owner) {
-        super(x, y,owner);
+    public Queen(int x, int y, Player owner, String colour) {
+        super(x, y,owner,colour);
         this.x=x;
         this.y=y;
         this.pieceType="queen";
     }
 
     public ChessPiece clone(){
-        return new Queen(x,y,owner);
+        return new Queen(x,y,owner,colour);
     }
     public List<int[]> controlledSquares(Board board) {
         List<int[]> controlled = new ArrayList<>();

@@ -1,4 +1,6 @@
 
+import javafx.application.Application;
+
 import java.util.Scanner;
 
 public class Game {
@@ -6,14 +8,22 @@ public class Game {
     private Player player2;
     private Board board;
     private Player currentPlayer;
+    boolean gameover;
 
     public Game(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
-        this.currentPlayer=player1;
+        this.currentPlayer = player1;
         this.board = new Board(player1, player2);
-        boolean gameover=false;
-        while (gameover==false) {
+        gameover = false;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+    public void runGame() {
+
+        while (this.gameover==false) {
 
             board.print();
             Scanner scan = new Scanner(System.in);

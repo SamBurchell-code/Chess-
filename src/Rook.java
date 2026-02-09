@@ -3,14 +3,16 @@ import java.util.List;
 
 public class Rook extends ChessPiece {
 
-    public Rook(int x, int y, Player owner) {
-        super(x, y, owner);
+    public Rook(int x, int y, Player owner, String colour) {
+        super(x, y, owner,colour);
         this.x=x;
         this.y=y;
         this.pieceType="rook";
     }
+
+
     public ChessPiece clone(){
-        return new Rook(x,y,owner);
+        return new Rook(x,y,owner, colour);
     }
 
     public List<int[]> controlledSquares(Board board) {

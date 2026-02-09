@@ -3,15 +3,15 @@ import java.util.ArrayList;
 
 public class Knight extends ChessPiece {
 
-    public Knight(int x, int y, Player owner) {
-        super(x, y, owner);
+    public Knight(int x, int y, Player owner, String colour) {
+        super(x, y, owner,colour);
         this.x=x;
         this.y=y;
         this.pieceType="knight";
     }
 
     public ChessPiece clone(){
-        return new Knight(x,y,owner);
+        return new Knight(x,y,owner,colour);
     }
 
     public List<int[]> controlledSquares(Board board) {

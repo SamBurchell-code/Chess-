@@ -22,26 +22,26 @@ public class Board {
     public Board (Player player1, Player player2) {
         this.squares = new ChessPiece[9][9];
 
-        squares[1][1] = new Rook(1,1, player1 );
-        squares[2][1] = new Knight (2,1, player1);
-        squares[3][1] = new Bishop(3,1, player1);
-        squares[4][1] = new Queen(4,1,player1);
-        squares[5][1] = new King (5,1,player1);
-        squares[6][1] = new Bishop(6,1,player1);
-        squares[7][1] = new Knight(7,1,player1);
-        squares[8][1] = new Rook(8,1,player1);
+        squares[1][1] = new Rook(1,1, player1, "white" );
+        squares[2][1] = new Knight (2,1, player1, "white");
+        squares[3][1] = new Bishop(3,1, player1, "white");
+        squares[4][1] = new Queen(4,1,player1, "white");
+        squares[5][1] = new King (5,1,player1, "white");
+        squares[6][1] = new Bishop(6,1,player1, "white");
+        squares[7][1] = new Knight(7,1,player1, "white");
+        squares[8][1] = new Rook(8,1,player1,"white");
         for (int i=1;i<9;i++) {
-            squares[i][2] =new Pawn (i,2,player1, "White");
-            squares[i][7] = new Pawn( i,7,player2,"Black");
+            squares[i][2] =new Pawn (i,2,player1, "white");
+            squares[i][7] = new Pawn( i,7,player2,"black");
         }
-        squares[1][8] = new Rook(1,8,player2);
-        squares[2][8] = new Knight (2,8,player2);
-        squares[3][8] = new Bishop(3,8,player2);
-        squares[4][8] = new Queen(4,8,player2);
-        squares[5][8] = new King (5,8,player2);
-        squares[6][8] = new Bishop(6,8,player2);
-        squares[7][8] = new Knight(7,8,player2);
-        squares[8][8] = new Rook(8,8,player2);
+        squares[1][8] = new Rook(1,8,player2,"black");
+        squares[2][8] = new Knight (2,8,player2,"black");
+        squares[3][8] = new Bishop(3,8,player2,"black");
+        squares[4][8] = new Queen(4,8,player2,"black");
+        squares[5][8] = new King (5,8,player2,"black");
+        squares[6][8] = new Bishop(6,8,player2,"black");
+        squares[7][8] = new Knight(7,8,player2,"black");
+        squares[8][8] = new Rook(8,8,player2,"black");
     }
 
     public String pieceAt(int x, int y) {
@@ -105,8 +105,8 @@ public class Board {
         Pawn pawn = (Pawn) squares[sourceX][sourceY];
         int direction=0;
         switch (pawn.getColour()){
-            case "White": direction=1; break;
-            case "Black": direction=-1; break;
+            case "white": direction=1; break;
+            case "black": direction=-1; break;
             default:{
                     System.out.println("Problem with switch statement in movePawn");
                     return false;
@@ -139,6 +139,10 @@ public class Board {
 
 
         return false;
+    }
+
+    public Board getBoard() {
+        return this;
     }
 
     public void print() {

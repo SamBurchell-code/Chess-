@@ -3,15 +3,15 @@ import java.util.List;
 
 public class Bishop extends ChessPiece {
 
-    public Bishop(int x, int y, Player owner) {
-        super(x, y, owner);
+    public Bishop(int x, int y, Player owner, String colour) {
+        super(x, y, owner, colour);
         this.x = x;
         this.y = y;
         this.pieceType = "bishop";
     }
 
     public ChessPiece clone() {
-        return new Bishop(x, y, owner);
+        return new Bishop(x, y, owner,colour);
     }
 
     public List<int[]> controlledSquares(Board board) {
